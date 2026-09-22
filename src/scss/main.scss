@@ -1,9 +1,9 @@
 @use "base"; 
 @use "components"; 
-@use "login"; 
-@use "menu"; 
-@use "messages"; 
-@use "users"; 
+@use "./pages/login.scss"; 
+@use "./pages/menu.scss"; 
+@use "./pages/messages.scss"; 
+@use "./pages/users.scss"; 
 @use "animations";
-@use "media_querys";  
+@use "media_queries";  
 
