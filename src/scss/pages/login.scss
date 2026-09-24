@@ -1,26 +1,69 @@
 @use "../base.scss"; 
+@use "../components.scss";
 
 body {
-    background-color: #EFE9E7;
+    background-color: base.$color-primary-green;
+    font-family: base.$font-text;
 }
 
-header {
+.login-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
     background-color: #FFF6EE;
     padding: 1rem 3rem;
-    box-shadow: 1px 0px 8px grey;
+    box-shadow: 2px 0px 16px black;
 
     img {
         width: 150px;
         height: auto;
     }
+
+    h1 {
+        font-family: base.$font-subheaders;
+        font-size: 28px;
+    }
 }
 
-footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.background {
+    padding: 7rem;
+    text-align: center;
+}
 
-    background-color: #FFF6EE;
-    padding: 1rem 3rem;
-    box-shadow: 1px 0px 8px grey;
+.login-container {
+    margin: 0 auto;
+    width: 30%;
+    background-color: base.$color-light-beige;
+    padding: 2.5rem 5rem;
+    box-shadow: 2px 2px 16px black;
+
+    h2 {
+        font-family: base.$font-subheaders;
+        font-size: 24px;
+        text-align: start;
+        margin-bottom: 1.5rem;
+    }
+
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        text-align: start;
+        gap: 0.5rem;
+        margin: 0 auto;
+
+        margin-bottom: 1.5rem;
+
+        input {
+            height: 1.8rem;
+            width: 100%;
+            padding: 0.5rem;
+            font-family: base.$font-text;
+        }
+    }
+
+    button {
+        @include components.buttonstyle(1.5rem, 0rem);
+    }
 }

@@ -1,0 +1,32 @@
+@use "/src/scss/base.scss"; 
+
+@mixin buttonstyle($margin-top, $margin-btm) {
+    display: flex; 
+    flex-direction: row;
+    gap: 0.7rem;
+    align-items: center;
+
+    margin-top: $margin-top;
+    margin-bottom: $margin-btm;
+
+    border: none;
+    background-color: base.$color-primary-orange;
+    color: white;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-family: base.$font-text;
+    font-size: base.$font-size-buttons;
+
+    &:hover {
+        background-color: base.$color-dark-orange;
+        cursor: pointer;
+    }
+}
+
+@mixin push-containers {
+    background-color: base.$color-light-beige;
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: start;
+    box-shadow: 3px 3px 20px black;
+}

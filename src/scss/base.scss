@@ -1,5 +1,30 @@
+@use 'sass:color';
+
 * {
     box-sizing: border-box;
     padding: 0; 
     margin: 0; 
 }
+
+//Primary colors 
+$color-primary-green: #2B4315;
+$color-primary-orange: #DC7C43;
+$color-primary-brown: #493014;
+$color-primary-beige: #E4C8A6; 
+
+//Secondary colors
+$color-light-green: #647647; 
+$color-dark-green: #202912; 
+$color-light-beige: #FFF6EE;
+
+//Color variations 
+$color-dark-orange: color.scale(#DC7C43, $lightness: -20%);
+
+//Fonts
+$font-headers: "Spicy Rice", sans-serif; 
+$font-subheaders: "Manrope", sans-serif; 
+$font-text: "Brawler", serif; 
+
+//Font sizes 
+$font-size-h1: 64px; 
+$font-size-buttons: 16px;

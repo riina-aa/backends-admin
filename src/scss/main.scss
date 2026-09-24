@@ -1,6 +1,8 @@
 @use "base"; 
 @use "components"; 
+@use "navigation";
 @use "./pages/login.scss"; 
+@use "./pages/dashboard.scss";
 @use "./pages/menu.scss"; 
 @use "./pages/messages.scss"; 
 @use "./pages/users.scss"; 
