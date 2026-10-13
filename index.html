@@ -1,24 +1,29 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Brawler:wght@400;700&family=Manrope:wght@200..800&family=Spicy+Rice&display=swap" rel="stylesheet">
-    <script type="module" src="/src/js/main.js"></script>
-    <title>The Greenhouse - Back Office</title>
-  </head>
-  <body>
-    <main>
-      <header class="login-header">
-        <img src="/public/logga.png" alt="The Greenhouse logga">
-        <h1>Back Office Administration</h1>
-      </header>
-      <div class="background">
-        <section class="login-container">
-          <h2>Logga in</h2>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Brawler:wght@400;700&family=Manrope:wght@200..800&family=Spicy+Rice&display=swap"
+    rel="stylesheet">
+  <script type="module" src="/src/js/main.js"></script>
+  <title>The Greenhouse - Back Office</title>
+</head>
+
+<body>
+  <main>
+    <header class="login-header">
+      <img src="/public/logga.png" alt="The Greenhouse logga">
+      <h1>Back Office Administration</h1>
+    </header>
+    <div class="background">
+      <section class="login-container">
+        <h2>Logga in</h2>
+        <form id="loginForm">
           <div class="inputs">
             <label for="login-username">Användarnamn:</label>
             <input type="text" id="login-username">
@@ -27,9 +32,12 @@
             <label for="login-password">Lösenord:</label>
             <input type="password" id="login-password" name="password">
           </div>
+          <div class="error-container"></div>
           <button type="submit">Logga in</button>
-        </section>
-      </div>
-    </main>
-  </body>
+        </form>
+      </section>
+    </div>
+  </main>
+</body>
+
 </html>

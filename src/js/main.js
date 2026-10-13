@@ -6,12 +6,134 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function init() {
 
+    const loginForm = document.querySelector("#loginForm"); 
+
+    if (loginForm) {
+        loginForm.addEventListener("submit", loginUser); 
+    }
+
+    const registerForm = document.querySelector("#addUser-form");
+    
+     if (registerForm) {
+        registerForm.addEventListener("submit", registerUser)
+    }
+
     const form = document.querySelector("#addProduct"); 
 
     if (form) {
         form.addEventListener("submit", addProducts)
     }
+
+    const userList = document.querySelector("#userList"); 
+
+    if (userList) {
+        fetchUsers(); 
+    }
 }; 
+
+async function loginUser(e) {
+
+    e.preventDefault(); 
+
+    let userInput = document.querySelector("#login-username").value;
+    let passwordInput = document.querySelector("#login-password").value;
+
+    if (!userInput || !passwordInput) {
+
+        const errorContainer = document.querySelector(".error-container"); 
+
+        errorContainer.textContent = `Du måste fylla i användarnamn och lösenord.`
+        return;
+    }
+
+    let user = {
+        username: userInput, 
+        password: passwordInput
+    }
+
+    try {
+        const resp = await fetch("http://localhost:3000/greenhouse/login", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(user)
+        });
+
+        if (resp.ok) {
+            const data = await resp.json();
+            localStorage.setItem("greenhouse-token", data.response.token);
+            window.location.href = "menu.html"
+        }
+
+    } catch (error) {
+        throw error;
+    }
+}; 
+
+async function registerUser(e) {
+
+    e.preventDefault();
+
+    let userInput = document.querySelector("#register-username").value;
+    let passwordInput = document.querySelector("#register-password").value;
+    const errorContainer = document.querySelector("#register-messages");
+
+    if (!userInput || !passwordInput) {
+
+        errorContainer.innerHTML = `
+            <p>Du måste fylla i användarnamn och lösenord</p>
+        `;
+
+        return;
+    };
+
+    let user = {
+        username: userInput,
+        password: passwordInput
+    }
+
+    try {
+        const resp = await fetch("http://localhost:3000/greenhouse/register", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(user)
+        });
+
+        if (resp.ok) {
+            const data = await resp.json();
+
+            errorContainer.innerHTML = `
+            <p>${data.message}</p>
+            `
+        }
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+async function fetchUsers() {
+
+    const token = localStorage.getItem("greenhouse-token"); 
+
+    let result = await fetch("http://localhost:3000/greenhouse/users", {
+        method: "GET", 
+        headers: {
+            authorization: "Bearer " + token
+        }
+    });
+
+    let data = await result.json();
+
+    renderUserList(data);
+};
+
+async function renderUserList(data) {
+
+}
 
 async function addProducts(e) {
 
@@ -41,7 +163,7 @@ async function addProducts(e) {
         available: pAvailable
      }
 
-     const token = localStorage.getItem("webshop-token");
+     const token = localStorage.getItem("greenhouse-token");
 
      try {
         const resp = await fetch("http://localhost:3000/greenhouse/products", {
