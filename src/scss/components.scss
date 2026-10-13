@@ -22,12 +22,31 @@
         background-color: base.$color-dark-orange;
         cursor: pointer;
     }
+}; 
+
+@mixin delete-btn() {
+    border: none;
+    background-color: base.$color-primary-orange;
+    color: black;
+    border-radius: 60px;
+    padding: 0.3rem 0.3rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        background-color: base.$color-dark-orange;
+        cursor: pointer;
+    }
 }
 
-@mixin push-containers {
+@mixin push-containers($width) {
     background-color: base.$color-light-beige;
     border-radius: 20px;
     padding: 3rem;
     text-align: start;
     box-shadow: 3px 3px 20px black;
+    width: $width;
+    height: fit-content;
 }

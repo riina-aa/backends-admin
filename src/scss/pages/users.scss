@@ -1,0 +1,57 @@
+@use "../base.scss";
+@use "../components.scss";
+
+.user-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+    margin: 0 auto;
+
+    form {
+        @include components.push-containers(40%); 
+
+        h2 {
+            margin-bottom: 2rem;
+        }
+
+        .inputs {
+            display: flex;
+            flex-direction: column;
+            text-align: start;
+            margin-bottom: 1rem;
+
+            input {
+                padding: 0.5rem 0.7rem;
+                font-family: base.$font-text;
+            }
+        }
+
+        #register-messages {
+            color: tomato;
+        }
+
+        button {
+            @include components.buttonstyle(2rem, 0);
+        }
+    }
+}
+
+.user-container {
+    @include components.push-containers(55%); 
+
+    h2 {
+        margin-bottom: 2rem;
+    }
+
+    .user-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+            @include components.delete-btn(); 
+        }
+    }
+}

@@ -28,7 +28,7 @@ function init() {
 
     if (userList) {
         fetchUsers(); 
-    }
+    }; 
 }; 
 
 async function loginUser(e) {
@@ -131,8 +131,63 @@ async function fetchUsers() {
     renderUserList(data);
 };
 
-async function renderUserList(data) {
+async function renderUserList(users) {
 
+    const selectedList = document.querySelector("#userList"); 
+
+    if (!selectedList) return;
+
+    selectedList.innerHTML = ""; //Tömmer listan innan ny rendering
+
+    users.forEach((user) => {
+
+        selectedList.innerHTML += `
+        <article class="user-info">
+            <div class="information">
+                <p class="displayUsername">Användarnamn: ${user.username}</p>
+            </div>
+            <button data-id="${user._id}" type="button" class="deleteBtn">
+                <span class="material-symbols-outlined">delete</span>
+            </button>
+        </article>
+        `
+    });
+
+    addDeleteListeners(); 
+}; 
+
+function addDeleteListeners() {
+
+    const deleteButtons = document.querySelectorAll(".deleteBtn");
+
+    deleteButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const id = button.dataset.id;
+
+            deleteUser(id);
+        })
+    })
+};
+
+async function deleteUser(id) {
+
+    const token = localStorage.getItem("greenhouse-token");
+
+    try {
+        const response = await fetch(`http://localhost:3000/greenhouse/users/${id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: "Bearer " + token
+            }
+        });
+
+        if (response.ok) {
+            fetchUsers(); 
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 async function addProducts(e) {
