@@ -1,53 +1,59 @@
 import "../scss/main.scss";
 
 document.addEventListener("DOMContentLoaded", () => {
-    init(); 
+    init();
 })
 
 function init() {
 
-    const loginForm = document.querySelector("#loginForm"); 
+    const loginForm = document.querySelector("#loginForm");
 
     if (loginForm) {
-        loginForm.addEventListener("submit", loginUser); 
+        loginForm.addEventListener("submit", loginUser);
     }
 
     const registerForm = document.querySelector("#addUser-form");
-    
-     if (registerForm) {
+
+    if (registerForm) {
         registerForm.addEventListener("submit", registerUser)
     }
 
-    const form = document.querySelector("#addProduct"); 
+    const form = document.querySelector("#addProduct");
 
     if (form) {
         form.addEventListener("submit", addProducts)
     }
 
-    const userList = document.querySelector("#userList"); 
+    const userList = document.querySelector("#userList");
 
     if (userList) {
-        fetchUsers(); 
-    }; 
-}; 
+        fetchUsers();
+    };
+
+    const menuList = document.querySelector(".menu-overview"); 
+
+    if (menuList) {
+        fetchProducts();
+    }
+};
 
 async function loginUser(e) {
 
-    e.preventDefault(); 
+    e.preventDefault();
 
     let userInput = document.querySelector("#login-username").value;
     let passwordInput = document.querySelector("#login-password").value;
 
     if (!userInput || !passwordInput) {
 
-        const errorContainer = document.querySelector(".error-container"); 
+        const errorContainer = document.querySelector(".error-container");
 
         errorContainer.textContent = `Du måste fylla i användarnamn och lösenord.`
         return;
     }
 
     let user = {
-        username: userInput, 
+        username: userInput,
         password: passwordInput
     }
 
@@ -69,7 +75,7 @@ async function loginUser(e) {
     } catch (error) {
         throw error;
     }
-}; 
+};
 
 async function registerUser(e) {
 
@@ -117,10 +123,10 @@ async function registerUser(e) {
 
 async function fetchUsers() {
 
-    const token = localStorage.getItem("greenhouse-token"); 
+    const token = localStorage.getItem("greenhouse-token");
 
     let result = await fetch("http://localhost:3000/greenhouse/users", {
-        method: "GET", 
+        method: "GET",
         headers: {
             authorization: "Bearer " + token
         }
@@ -133,7 +139,7 @@ async function fetchUsers() {
 
 async function renderUserList(users) {
 
-    const selectedList = document.querySelector("#userList"); 
+    const selectedList = document.querySelector("#userList");
 
     if (!selectedList) return;
 
@@ -153,8 +159,8 @@ async function renderUserList(users) {
         `
     });
 
-    addDeleteListeners(); 
-}; 
+    addDeleteListeners();
+};
 
 function addDeleteListeners() {
 
@@ -182,7 +188,7 @@ async function deleteUser(id) {
         });
 
         if (response.ok) {
-            fetchUsers(); 
+            fetchUsers();
         }
 
     } catch (error) {
@@ -192,35 +198,35 @@ async function deleteUser(id) {
 
 async function addProducts(e) {
 
-     e.preventDefault(); 
+    e.preventDefault();
 
-     let pName = document.querySelector("#product-name").value; 
-     let pDescription = document.querySelector("#description").value; 
-     let pPrice = document.querySelector("#price").value; 
-     let pCategory = document.querySelector("#category").value; 
-     let pAllergies = document.querySelector("#allergies").value; 
-     let pImage = document.querySelector("#image").value; 
-     let pAvailable = document.querySelector("#available").value; 
-     const messageContainer = document.querySelector("#error-container"); 
+    let pName = document.querySelector("#product-name").value;
+    let pDescription = document.querySelector("#description").value;
+    let pPrice = document.querySelector("#price").value;
+    let pCategory = document.querySelector("#category").value;
+    let pAllergies = document.querySelector("#allergies").value;
+    let pImage = document.querySelector("#image").value;
+    let pAvailable = document.querySelector("#available").value;
+    const messageContainer = document.querySelector(".error-container");
 
-     if (!pName || !pDescription || !pPrice || !pCategory || !pAllergies || !pImage || !pAvailable) {
+    if (!pName || !pDescription || !pPrice || !pCategory || !pAllergies || !pImage || !pAvailable) {
         messageContainer.textContent = `Du måste fylla i alla fälten.`
         return;
-     }
+    }
 
-     let product = {
+    let product = {
         productName: pName,
-        description: pDescription, 
-        price: pPrice, 
-        category: pCategory, 
-        allergies: pAllergies, 
-        image: pImage, 
+        description: pDescription,
+        price: pPrice,
+        category: pCategory,
+        allergies: pAllergies,
+        image: pImage,
         available: pAvailable
-     }
+    }
 
-     const token = localStorage.getItem("greenhouse-token");
+    const token = localStorage.getItem("greenhouse-token");
 
-     try {
+    try {
         const resp = await fetch("http://localhost:3000/greenhouse/products", {
             method: "POST",
             headers: {
@@ -238,13 +244,78 @@ async function addProducts(e) {
             `
             const form = document.querySelector("#addProducts");
 
+            fetchProducts();
             form.reset();
         }
 
     } catch (error) {
         console.log(error)
     }
+};
 
+async function fetchProducts() {
 
-    
+    const token = localStorage.getItem("greenhouse-token");
+
+    let result = await fetch("http://localhost:3000/greenhouse/products", {
+        method: "GET",
+        headers: {
+            authorization: "Bearer " + token
+        }
+    });
+
+    let data = await result.json();
+
+    console.log(data)
+    renderProducts(data);
 }
+
+function renderProducts(products) {
+
+    const selectedList = document.querySelector(".menu-overview");
+
+    if (!selectedList) return;
+
+    selectedList.innerHTML = ""; //Tömmer listan innan ny rendering
+
+
+    const groupedProducts = products.reduce((groups, product) => {
+
+        const category = product.category;
+
+        if (!groups[category]) {
+            groups[category] = [];
+        }
+
+        groups[category].push(product);
+
+        return groups;
+    }, {});
+
+    Object.entries(groupedProducts).forEach(([category, products]) => {
+
+        const categorySection = document.createElement("section");
+        categorySection.classList.add("menu-category");
+
+        categorySection.innerHTML = `
+            <h2>${category}</h2>
+            <div class="category-products"></div>
+        `;
+
+        const productContainer = categorySection.querySelector(".category-products");
+
+        products.forEach((product) => {
+            productContainer.innerHTML += `
+                <article class="menu-product">
+                    <img src="" alt="">
+                    <h3>${product.productName}</h3>
+                    <p>${product.description}</p>
+                    <p class="price">${product.price} kr</p>
+                </article>
+            `;
+        });
+
+        selectedList.appendChild(categorySection);
+    });
+};
+
