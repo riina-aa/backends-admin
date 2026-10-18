@@ -6,6 +6,10 @@ body {
     font-family: base.$font-text;
 }
 
+.auth-pending {
+    visibility: hidden;
+}
+
 .login-header {
     display: flex;
     flex-direction: row;

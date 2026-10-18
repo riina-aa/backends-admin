@@ -10,12 +10,37 @@ let selectedProductId = [];
 let orders = [];
 let selectedOrderId = null;
 
-function init() {
+async function init() {
+
+    const currentPage = window.location.pathname;
+
+    // Sidor som kräver inloggning
+    const protectedPages = [
+        "/menu.html",
+        "/users.html",
+        "/orders.html"
+    ];
+
+    // Kontrollera bara autentisering på skyddade sidor
+    if (protectedPages.includes(currentPage)) {
+
+        const authenticated = await checkAuth();
+
+        if (!authenticated) return;
+
+        document.body.classList.remove("auth-pending");
+    }
 
     const loginForm = document.querySelector("#loginForm");
 
     if (loginForm) {
         loginForm.addEventListener("submit", loginUser);
+    }
+
+    const logoutBtn = document.querySelector(".logout-btn")
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", logout);
     }
 
     const registerForm = document.querySelector("#addUser-form");
@@ -729,6 +754,43 @@ async function deleteProduct() {
 
     } catch (error) {
         alert("Något gick fel när beställningen skulle raderas.");
+    }
+}
+
+function logout() {
+    localStorage.removeItem("greenhouse-token");
+
+    window.location.href = "/index.html";
+}
+
+async function checkAuth() {
+
+    const token = localStorage.getItem("greenhouse-token");
+
+    if (!token) {
+        window.location.replace("/index.html");
+        return false;
+    }
+
+    try {
+        const response = await fetch("http://localhost:3000/greenhouse/verify", {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            localStorage.removeItem("greenhouse-token");
+            window.location.replace("/index.html");
+            return false;
+        }
+
+        return true;
+
+    } catch (error) {
+        console.error("Authentication failed:", error);
+        window.location.replace("/index.html");
+        return false;
     }
 }
 
