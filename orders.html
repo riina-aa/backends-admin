@@ -1,42 +1,83 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Brawler:wght@400;700&family=Manrope:wght@200..800&family=Spicy+Rice&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" />
-    <script type="module" src="/src/js/main.js"></script>
-    <title>The Greenhouse - Back Office</title>
-  </head>
-  <body>
-    <main>
-      <header>
-        <img src="/public/logga.png" alt="The Greenhouse logga">
-        <nav>
-            <ul>
-                <li><a href="dashboard.html">Översikt</a></li>
-                <li><a href="menu.html">Meny</a></li>
-                <li><a href="orders.html">Beställningar</a></li>
-                <li><a href="users.html">Användare</a></li>
-            </ul>
-        </nav>
-        <div class="button-container">
-            <button>
-                <span class="material-symbols-outlined">logout</span>
-                <span>Logga ut</span>
-            </button>
-        </div>
-        
-      </header>
-      <div class="background">
-          <div class="orders-overview">
-            <h2>Beställningar</h2>
-            <div class="order-list"></div>
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Brawler:wght@400;700&family=Manrope:wght@200..800&family=Spicy+Rice&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" />
+  <script type="module" src="/src/js/main.js"></script>
+  <title>The Greenhouse - Back Office</title>
+</head>
+
+<body>
+  <main>
+    <header>
+      <img src="/public/logga.png" alt="The Greenhouse logga">
+      <nav>
+        <ul>
+          <li><a href="dashboard.html">Översikt</a></li>
+          <li><a href="menu.html">Meny</a></li>
+          <li><a href="orders.html">Beställningar</a></li>
+          <li><a href="users.html">Användare</a></li>
+        </ul>
+      </nav>
+      <div class="button-container">
+        <button>
+          <span class="material-symbols-outlined">logout</span>
+          <span>Logga ut</span>
+        </button>
       </div>
-    </main>
-  </body>
+
+    </header>
+    <div class="background">
+      <div class="orders-overview">
+        <div class="order-list"></div>
+      </div>
+      <dialog class="modal">
+
+        <h2>Redigera beställning</h2>
+
+        <form id="edit-order-form">
+
+          <div class="edit-order-inputs">
+            <div class="order-input">
+              <label for="order-status">Status:</label>
+              <select id="order-status">
+                <option value="new">Ny beställning</option>
+                <option value="confirmed">Bekräftad till kund</option>
+                <option value="inProgress">Påbörjad</option>
+                <option value="ready">Redo för hämtning</option>
+                <option value="completed">Hämtad och klar</option>
+                <option value="cancelled">Avbruten</option>
+              </select>
+              <button type="button" class="delete-order">Radera beställning</button>
+              <p>Ändra status till <strong>avbokad</strong> så beställningshistoriken behålls. Radera endast om beställningen ska tas bort permanent.</p>
+            </div>
+            <div class="order-input">
+              <label for="staff-notes">Personalanteckningar:</label>
+              <textarea id="staff-notes" rows="5"></textarea>
+            </div>
+          </div>
+
+
+          <div class="edit-order-buttons">
+            <button type="submit" class="save-order">Spara ändringar</button>
+            <button type="button" class="close-modal">Avbryt</button>
+          </div>
+
+
+        </form>
+
+      </dialog>
+    </div>
+  </main>
+</body>
+
 </html>

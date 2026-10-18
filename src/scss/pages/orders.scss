@@ -1,0 +1,180 @@
+@use "../components.scss";
+@use "../base.scss";
+
+
+.order {
+    @include components.push-containers(70%);
+    margin-bottom: 3rem;
+
+    .status-badge {
+        border: none;
+        font-size: 16px;
+        padding: 0.5rem 0.7rem;
+        border-radius: 20px;
+        color: white;
+
+        &.new {
+            background-color: base.$color-light-green;
+        }
+
+        &.confirmed {
+            background-color: #FBB02D;
+        }
+
+        &.inProgress {
+            background-color: #522F75;
+        }
+
+        &.ready {
+            background-color: #084887;
+        }
+
+        &.completed {
+            background-color: #92B6B1;
+        }
+
+        &.cancelled {
+            background-color: #A23E48;
+        }
+    }
+
+
+    .row1,
+    .row3,
+    .row4,
+    .row5 {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+    }
+
+    .row1 {
+        align-items: center;
+
+        h3 {
+            font-size: 32px;
+        }
+    }
+
+    .row2 {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .row3 {
+        margin-bottom: 3rem;
+    }
+
+    .row6 {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .info-title {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .different {
+        width: 48%;
+        background-color: white;
+        border: 1px solid black;
+        padding: 1rem;
+    }
+
+    .edit-order {
+        @include components.buttonstyle(0, 0);
+    }
+}
+
+.modal {
+    width: 50%; 
+    margin: 0 auto;
+    margin-top: 10rem;
+
+    background-color: base.$color-light-beige;
+    padding: 2rem;
+    border: 2px solid base.$color-primary-green;
+
+    h2 {
+        margin-bottom: 2rem;
+    }
+
+    .edit-order-inputs {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 3rem;
+        
+        .order-input {
+            display: flex;
+            flex-direction: column;
+            text-align: start;
+
+            width: 40%;
+
+            label {
+                margin-bottom: 0.5rem;
+            }
+
+            select {
+                width: 100%;
+                padding: 0.5rem 0.7rem;
+                font-family: base.$font-text;
+            }
+
+            textarea {
+                width: 100%;
+                padding: 0.5rem;
+                font-family: base.$font-text;
+            }
+
+            button {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                max-width: fit-content;
+                padding: 0.5rem 0.7rem;
+
+            }
+
+            p {
+                font-size: 10px;
+            }
+        }
+    }
+
+    .edit-order-buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            justify-content: center;
+
+            .save-order {
+                @include components.buttonstyle(0, 0);
+            }
+
+            .close-modal {
+                @include components.buttonstyleCancel(); 
+            }
+        }
+
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px);
+    }
+}

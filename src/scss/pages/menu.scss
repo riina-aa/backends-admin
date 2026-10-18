@@ -2,71 +2,242 @@
 @use "../components.scss";
 
 
-.sub-menu {
-    margin-bottom: 3rem;
-    
-    button {
-        @include components.buttonstyle(0rem, 0rem);
+.add-product {
+    @include components.push-containers(100%);
+
+    h2 {
+        margin-bottom: 2rem;
+    }
+
+    #addProduct {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: start;
+
+        .inputs {
+            display: flex;
+            flex-direction: column;
+
+            label {
+                margin-bottom: 0.7rem;
+            }
+
+            input {
+                padding: 0.5rem 1rem;
+                margin-bottom: 1.5rem;
+                font-family: base.$font-text;
+            }
+
+            select {
+                padding: 0.5rem 1rem;
+                margin-bottom: 1.5rem;
+                font-family: base.$font-text;
+            }
+
+            textarea {
+                padding: 0.5rem 1rem;
+                margin-bottom: 1.5rem;
+                font-family: base.$font-text;
+            }
+
+            #image {
+                background-color: white;
+                border: 1px solid black;
+            }
+        }
+
+        .col1,
+        .col2 {
+            width: 30%;
+        }
+
+        .col3 {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            width: 30%;
+
+            button {
+                @include components.buttonstyle(2rem, 0rem);
+                display: inline-block;
+            }
+        }
     }
 }
 
-#addProduct {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+
+.menu-overview {
+    @include components.push-containers(100%);
+    margin-top: 3rem;
+
+    .menu-category {
+        margin-bottom: 3rem;
+
+        h2 {
+            margin-bottom: 1rem;
+            font-family: base.$font-headers;
+            font-weight: 400;
+            font-size: 32px;
+        }
+
+        .menu-product {
+
+            .p-description {
+                max-width: 50ch;
+            }
+
+            .menu-title {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 0.5rem;
+                margin-top: 1rem;
+            }
+
+            .product-actions {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+
+                .visible {
+                    background-color: base.$status-confirmed;
+                    padding: 0.5rem 0.7rem;
+                    border-radius: 20px;
+                }
+
+                .hidden {
+                    background-color: base.$status-completed;
+                    padding: 0.5rem 0.7rem;
+                    border-radius: 20px;
+                }
+
+                .edit-action {
+                    background-color: base.$color-light-green;
+                    padding: 0.5rem 0.7rem;
+                    border-radius: 20px;
+                    font-size: 20px;
+                    color: white;
+                    font-weight: 400;
+
+                    &:hover {
+                        background-color: base.$color-primary-green;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.menu-modal {
+    width: 50%;
+    margin: 0 auto;
 
     background-color: base.$color-light-beige;
-    padding: 3rem;
-    text-align: start;
+    padding: 2rem;
+    border: 2px solid base.$color-primary-green;
 
-    border-radius: 20px;
-
-    .inputs {
-        display: flex;
-        flex-direction: column;
-
-        label {
-            margin-bottom: 0.7rem;
-        }
-
-        input {
-            padding: 0.5rem 1rem;
-            margin-bottom: 1.5rem;
-            font-family: base.$font-text;
-        }
-
-        select {
-            padding: 0.5rem 1rem;
-            margin-bottom: 1.5rem;
-            font-family: base.$font-text;
-        }
-
-        textarea {
-            padding: 0.5rem 1rem;
-            margin-bottom: 1.5rem;
-            font-family: base.$font-text;
-        }
-
-        #image {
-            background-color: white;
-            border: 1px solid black;
-        }
+    h2 {
+        margin-bottom: 2rem;
     }
 
-    .col1,
-    .col2 {
-        width: 35%;
+    .current-item {
+        margin-bottom: 2rem;
     }
 
-    .col3 {
+    form {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-between;
 
-        width: 20%;
+        .about-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 50%;
 
-        button {
-            @include components.buttonstyle(0px, 1.5rem)
+            .menu-input {
+                display: flex;
+                flex-direction: column;
+                text-align: start;
+                margin-bottom: 1rem;
+
+                label {
+                    margin-bottom: 0.5rem;
+                }
+
+                textarea {
+                    padding: 0.5rem;
+                    font-family: base.$font-text;
+                    width: 100%;
+                }
+
+                select {
+                    padding: 0.5rem;
+                    font-family: base.$font-text;
+                }
+            }
+        }
+
+        .visibility {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 40%;
+
+            .edit-inputs {
+                display: flex;
+                flex-direction: column;
+
+                .menu-input {
+                    display: flex;
+                    flex-direction: column;
+                    text-align: start;
+                    margin-bottom: 1rem;
+
+                    label {
+                        margin-bottom: 0.5rem;
+                    }
+
+                    select {
+                        padding: 0.5rem;
+                        font-family: base.$font-text;
+                    }
+
+                    input {
+                        padding: 0.5rem;
+                        font-family: base.$font-text;
+                    }
+                }
+
+                button {
+                    margin-bottom: 1rem;
+                    padding: 0.5rem 0.7rem;
+                    cursor: pointer;
+                    font-family: base.$font-text;
+                }
+            }
+
+            .edit-buttons {
+                display: flex;
+                flex-direction: row;
+                gap: 1rem;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+
+                #edit-save {
+                    @include components.buttonstyle(0, 0);
+                }
+
+                .close-editModal {
+                    @include components.buttonstyleCancel();
+                }
+            }
+
         }
     }
 }

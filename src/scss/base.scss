@@ -17,6 +17,14 @@ $color-light-green: #647647;
 $color-dark-green: #202912; 
 $color-light-beige: #FFF6EE;
 
+//Status colors
+$status-new: $color-light-green; 
+$status-confirmed: #FBB02D;
+$status-inProgress: #522F75; 
+$status-ready: #084887; 
+$status-completed: #92B6B1; 
+$status-cancelled: #A23E48; 
+
 //Color variations 
 $color-dark-orange: color.scale(#DC7C43, $lightness: -20%);
 

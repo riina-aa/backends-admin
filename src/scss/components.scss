@@ -24,6 +24,27 @@
     }
 }; 
 
+@mixin buttonstyleCancel() {
+    display: flex; 
+    flex-direction: row;
+    gap: 0.7rem;
+    align-items: center;;
+
+    border: none;
+    background-color: base.$status-cancelled;
+    color: white;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    font-family: base.$font-text;
+    font-size: base.$font-size-buttons;
+
+    &:hover {
+        background-color: #85323B;
+        cursor: pointer;
+    }
+}; 
+
 @mixin delete-btn() {
     border: none;
     background-color: base.$color-primary-orange;

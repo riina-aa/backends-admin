@@ -11,7 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Brawler:wght@400;700&family=Manrope:wght@200..800&family=Spicy+Rice&display=swap"
     rel="stylesheet">
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout,add" />
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout,add,edit,settings" />
   <script type="module" src="/src/js/main.js"></script>
   <title>The Greenhouse - Back Office</title>
 </head>
@@ -37,13 +37,8 @@
 
     </header>
     <div class="background">
-      <div class="sub-menu">
-        <button>
-          <span class="material-symbols-outlined">add</span>
-          <span>Lägg till produkt i menyn</span>
-        </button>
-      </div>
       <div class="add-product">
+        <h2>Lägg till produkt</h2>
         <form id="addProduct" enctype="multipart/form-data">
           <div class="col1">
             <div class="inputs">
@@ -53,10 +48,6 @@
             <div class="inputs">
               <label for="description">Beskrivning:</label>
               <textarea rows="2" name="description" id="description"></textarea>
-            </div>
-            <div class="inputs">
-              <label for="price">Pris:</label>
-              <input type="number" name="price" id="price">
             </div>
           </div>
           <div class="col2">
@@ -78,6 +69,10 @@
           </div>
           <div class="col3">
             <div class="inputs">
+              <label for="price">Pris:</label>
+              <input type="number" name="price" id="price">
+            </div>
+            <div class="inputs">
               <label for="available">Synlig:</label>
               <select name="available" id="available">
                 <option value="true">Synlig</option>
@@ -90,6 +85,56 @@
         </form>
       </div>
       <div class="menu-overview"></div>
+      <dialog class="menu-modal">
+
+        <h2>Redigera menyprodukt</h2>
+        <p class="current-item"></p>
+
+        <form class="edit-menu-form">
+          <div class="about-item">
+            <div class="menu-input">
+              <label for="edit-description">Beskrivning:</label>
+              <textarea name="description" id="edit-description" rows="3"></textarea>
+            </div>
+            <div class="menu-input">
+              <label for="edit-allergies">Allergier:</label>
+              <textarea name="allergies" id="edit-allergies" rows="3"></textarea>
+            </div>
+            <div class="menu-input">
+              <label for="edit-category">Kategori:</label>
+              <select name="category" id="edit-category">
+                <option value="brunch">Brunch</option>
+                <option value="bakery">Bakelser/tårtor</option>
+                <option value="sourdough">Bröd</option>
+                <option value="hotDrinks">Varma drycker</option>
+                <option value="coldDrinks">Kalla drycker</option>
+                <option value="cocktails">Drinkar</option>
+              </select>
+            </div>
+          </div>
+          <div class="visibility">
+            <div class="edit-inputs">
+              <div class="menu-input">
+                <label for="edit-visibility">Synlig:</label>
+                <select name="available" id="edit-visibility">
+                  <option value="true">Synlig</option>
+                  <option value="false">Dold</option>
+                </select>
+              </div>
+              <div class="menu-input">
+                <label for="edit-price">Pris:</label>
+                <input type="number" name="price" id="edit-price">
+              </div>
+              <button class="editMenu-deleteBtn">Radera produkt</button>
+            </div>
+            <div class="edit-buttons">
+              <button type="submit" id="edit-save">Spara ändringar</button>
+              <button type="button" class="close-editModal">Avbryt</button>
+            </div>
+          </div>
+
+        </form>
+      </dialog>
     </div>
   </main>
 </body>
