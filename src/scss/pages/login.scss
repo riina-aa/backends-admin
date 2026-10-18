@@ -37,11 +37,8 @@ body {
 }
 
 .login-container {
+    @include components.push-containers(30%);
     margin: 0 auto;
-    width: 30%;
-    background-color: base.$color-light-beige;
-    padding: 2.5rem 5rem;
-    box-shadow: 2px 2px 16px black;
 
     h2 {
         font-family: base.$font-subheaders;
