@@ -207,14 +207,17 @@ async function registerUser(e) {
         if (resp.ok) {
             const data = await resp.json();
 
-            errorContainer.innerHTML = `
-            <p>${data.message}</p>
-            `
+            errorContainer.textContent = "Användaren har sparats."
+
+            const form = document.querySelector("#addUser-form"); 
+            form.reset();
         }
 
     } catch (error) {
         throw error;
     }
+
+    fetchUsers(); 
 }
 
 async function fetchUsers() {
@@ -333,10 +336,9 @@ async function addProducts(e) {
         if (resp.ok) {
             const data = await resp.json();
 
-            messageContainer.innerHTML = `
-            <p>${data.message}</p>
-            `
-            const form = document.querySelector("#addProducts");
+            messageContainer.textContent = "Produkten är tillagd."; 
+
+            const form = document.querySelector("#addProduct");
 
             fetchProducts();
             form.reset();

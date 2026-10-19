@@ -29,7 +29,7 @@
         }
 
         #register-messages {
-            color: tomato;
+            color: black;
         }
 
         button {
@@ -50,6 +50,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 1rem;
 
         button {
             @include components.delete-btn(); 
